@@ -4,7 +4,6 @@ WORKDIR /app
 ADD . /app
 
 RUN apk --no-cache --update add build-base && \
-    pip install --upgrade pip && \
     pip install -r /app/requirements.txt && \
     apk del build-base
 
