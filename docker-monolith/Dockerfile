@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get install -y wget ruby-full ruby-dev build-essential git gnupg ruby-bundler
 RUN apt-get install -y mongodb-server
 RUN git clone -b monolith https://github.com/express42/reddit.git
-
+#test
 
 COPY mongod.conf /etc/mongod.conf
 COPY mongod.conf /etc/mongod.conf
