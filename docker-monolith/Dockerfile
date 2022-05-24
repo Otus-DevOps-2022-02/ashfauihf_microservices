@@ -1,12 +1,17 @@
 FROM ubuntu:18.04
 
 RUN apt-get update
-RUN apt-get install -y mongodb-server ruby-full ruby-dev build-essential git
-RUN gem install bundler mongo
-RUN git clone -b monolith http://github.com/express42/reddit.git
+RUN apt-get install -y wget ruby-full ruby-dev build-essential git gnupg ruby-b>
+RUN apt-get install -y mongodb-server
+RUN git clone -b monolith https://github.com/express42/reddit.git
+#RUN apt-get update
+#RUN apt-get install -y mongodb-server ruby-full ruby-dev build-essential git
+#RUN gem install bundler mongo
+#RUN git clone -b monolith http://github.com/express42/reddit.git
 
 COPY mongod.conf /etc/mongod.conf
-COPY db_config /reddit/db_config
+COPY mongod.conf /etc/mongod.conf
+#COPY db_config /reddit/db_config
 COPY start.sh /start.sh
 
 RUN cd /reddit && rm Gemfile.lock && bundle install
