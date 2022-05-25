@@ -1,4 +1,18 @@
 # ashfauihf_microservices
+ДЗ по докер-3
+
+Команды Docker:
+Остановить старые копии контейнеров:
+docker kill $(docker ps -q)
+Создание сети:
+docker network create back_net --subnet=
+Создадние bridge-сеть в docker
+docker network create reddit --driver bridge
+Избавляем бизнес от ИТ-зависимости
+Host network driver
+Запуск контейнера в сетевом пространстве docker-хоста
+docker run -ti --rm --network host joffotron/docker-net-tools -c ifconfig
+
 ДЗ по докер-2
 Доккер команды:
 
