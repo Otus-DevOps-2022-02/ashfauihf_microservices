@@ -1,5 +1,29 @@
 # ashfauihf_microservices
-Выполнение дз по докеру.
+ДЗ по докер-2
+Доккер команды:
+
+Собираем наши образы
+
+docker build -t <your-dockerhub-login>/post:1.0 ./post-py
+docker build -t <your-dockerhub-login>/comment:1.0 ./comment
+docker build -t <your-dockerhub-login>/ui:1.0 ./ui
+
+Создаем сеть для контейнеров
+
+docker network create reddit
+
+Запускаем
+
+docker run -d --network=reddit \
+    --network-alias=post_db --network-alias=comment_db mongo:latest
+docker run -d --network=reddit \
+    --network-alias=post <your-dockerhub-login>/post:1.0
+docker run -d --network=reddit \
+    --network-alias=comment <your-dockerhub-login>/comment:1.0
+docker run -d --network=reddit \
+    -p 9292:9292 <your-dockerhub-login>/ui:1.0
+
+Выполнение дз по докеру-1.
 Команды docker
 
 docker version
@@ -71,3 +95,7 @@ docker run --name reddit -d -p 9292:9292 adavidenko/otus-reddit:1.0
 Зачистка
 docker-machine rm docker-host
 yc compute instance delete docker-host
+
+
+
+
