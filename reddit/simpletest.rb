@@ -1,6 +1,8 @@
 require_relative './app'
 require 'test/unit'
 require 'rack/test'
+require 'bundler/setup'
+require 'sinatra'
 
 set :environment, :test
 
