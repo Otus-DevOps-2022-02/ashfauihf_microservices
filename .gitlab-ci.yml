@@ -26,7 +26,7 @@ test_unit_job:
   services:
     - mongo:latest
   script:
-    - sudo ruby simpletest.rb 
+    - ruby simpletest.rb 
 
 test_integration_job:
   stage: test
