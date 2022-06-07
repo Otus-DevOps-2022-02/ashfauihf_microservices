@@ -1,6 +1,4 @@
-require 'rubygems'
-require 'bundler'
-require './app'
+require_relative './app'
 require 'test/unit'
 require 'rack/test'
 

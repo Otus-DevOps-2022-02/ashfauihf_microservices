@@ -13,8 +13,7 @@ variables:
 
 before_script:
   - cd reddit
-  - gem cleanup bundler
-  - gem install bundler
+  - gem install bundle
 
 build_job:
   stage: build
