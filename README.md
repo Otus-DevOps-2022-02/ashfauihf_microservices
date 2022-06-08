@@ -1,4 +1,11 @@
 # ashfauihf_microservices
+Дз по gitlab-ci-1\
+
+Команды по Docker:\
+Запустите контейнер - docker-compose up -d\
+Написание Yandex.Cloud CLI для создание ВМ\
+Установка Docker с помошью docker-machine\
+
 ДЗ по докер-3
 
 Команды Docker:
