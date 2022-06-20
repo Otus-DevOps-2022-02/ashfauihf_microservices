@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+  prometheus:
+    image: ${USER_NAME}/prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - prometheus_data:/prometheus
+    command: # Передаем доп параметры в командной строке
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention=1d'
+    networks:
+      - front_net
+      - back_net
+volumes:
+   prometheus_data: 
+networks:
+  front_net:
+    ipam:
+      config:
+        - subnet: 10.0.1.0/24
+  back_net:
+    ipam:
+      config:
+          - subnet: 10.0.2.0/24

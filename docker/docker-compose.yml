@@ -1,0 +1,67 @@
+version: '3.3'
+services:
+  post_db:
+    image: mongo:3.2
+    volumes:
+      - post_db:/data/db
+    networks:
+      - backend
+  ui:
+    #build: ../src/ui
+    image: ${USER_NAME}/ui:1.0
+    ports:
+      -  9292:9292/tcp
+    networks:
+      - frontend
+  post:
+    #build: ../src/post-py
+    image: ${USER_NAME}/post:1.0
+    networks:
+      - frontend
+      - backend
+  comment:
+    #build: ../src/comment
+    image: ${USER_NAME}/comment:1.0
+    networks:
+      - frontend
+      - backend
+
+  prometheus:
+    image: ${USER_NAME}/prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - prometheus_data:/prometheus
+    command: # Передаем доп параметры в командной строке
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention=1d'
+    networks:
+      - frontend
+      - backend
+
+  node-exporter:
+    image: prom/node-exporter:v0.15.2
+    user: root
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
+
+volumes:
+   prometheus_data:
+   post_db:
+
+networks:
+  frontend:
+    ipam:
+      config:
+        - subnet: 10.0.1.0/24
+  backend:
+    ipam:
+      config:
+        - subnet: 10.0.2.0/24

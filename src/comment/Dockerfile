@@ -1,4 +1,5 @@
 FROM ruby:2.2
+USER root
 RUN apt-get update -y && \
     apt-get --assume-yes install apt-transport-https ca-certificates && \
     apt-get install -y build-essential
