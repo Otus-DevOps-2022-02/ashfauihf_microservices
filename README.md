@@ -1,6 +1,8 @@
 # ashfauihf_microservices
 Дз по monitoring-1
 
+ссылка: https://hub.docker.com/repository/docker/asz1assassins/post
+
 Создадим инстанс на YC
 yc compute instance create \
 --name docker-host \
