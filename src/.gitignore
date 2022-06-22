@@ -1,20 +1,6 @@
-variables.json
-*.lock.hcl
-*.tfstate
-*.tfstate.*.backup
-*.tfstate.backup
-*.tfvars
-.terraform/
-variables.tf.backup
-*.tf.backup
-*.retry
-ansible/roles/jdauphant.nginx/*
-# Vagrant & molecule
-.vagrant/
-*.log
+docker-compose.yml
+build_info.txt
+prometheus/
+
+## python specific
 *.pyc
-.molecule
-.cache
-.pytest_cache
-ansible/venv/*
-.env
