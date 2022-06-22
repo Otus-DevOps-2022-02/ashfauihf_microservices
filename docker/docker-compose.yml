@@ -9,20 +9,20 @@ services:
       - backend
   ui:
     #build: ../src/ui
-    image: ${USER_NAME}/ui:1.0
+    image: ${USER_NAME}/ui
     ports:
       -  9292:9292/tcp
     networks:
       - frontend
   post:
     #build: ../src/post-py
-    image: ${USER_NAME}/post:1.0
+    image: ${USER_NAME}/post
     networks:
       - frontend
       - backend
   comment:
     #build: ../src/comment
-    image: ${USER_NAME}/comment:1.0
+    image: ${USER_NAME}/comment
     networks:
       - frontend
       - backend
