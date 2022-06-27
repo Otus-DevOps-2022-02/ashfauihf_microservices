@@ -8,6 +8,7 @@ RUN apt-get update \
     && mkdir $APP_HOME \
     && rm -rf /var/lib/apt/*
 
+USER root
 WORKDIR $APP_HOME
 ADD . $APP_HOME
 RUN bundle install

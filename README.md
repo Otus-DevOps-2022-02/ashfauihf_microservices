@@ -1,4 +1,68 @@
 # ashfauihf_microservices
+Дз по monitoring-1
+
+ссылка: https://hub.docker.com/repository/docker/asz1assassins/post
+
+Создадим инстанс на YC
+yc compute instance create \
+--name docker-host \
+--zone ru-central1-a \
+--network-interface subnet-name=default-ru-central1-a,nat-ip-version=ipv4 \
+--create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1804-lts,size=15 \
+--ssh-key ~/.ssh/appuser.pub
+
+
+Запустим docker-machine
+docker-machine create \
+--driver generic \
+--generic-ip-address=51.250.88.131 \
+--generic-ssh-user yc-user \
+--generic-ssh-key ~/.ssh/appuser \
+docker-host
+
+переключимся на работу с docker-machine
+eval $(docker-machine env docker-host)
+
+Уточнить ip docker-machine
+docker-machine ip docker-host
+
+Запустить prometheus в ВМ
+docker run --rm -p 9090:9090 -d --name prometheus prom/prometheus
+
+Соберем образ своего prometheus
+export USER_NAME=docker_login
+docker build -t $USER_NAME/prometheus .
+
+Создадим образы через docker_build.sh
+
+for i in ui post-py comment; do cd src/$i; bash docker_build.sh; cd -; done
+
+Создадим описание нашего docker-compose и запустим его
+docker-compose up -d
+
+Проверим как отзываются метрики если потушим один из контейнеров
+docker-compose stop post
+docker-compose start post
+
+Добавим node_exporter, проверим состояние CPU, дадим нагрузку
+docker-machine ssh docker-host
+yes > /dev/null
+
+Задлогинимся и запушим свои образы на DockerHub
+docker login
+docker push $USER_NAME/ui
+docker push $USER_NAME/comment
+docker push $USER_NAME/post
+docker push $USER_NAME/prometheus
+
+
+Дз по gitlab-ci-1
+
+Команды по Docker:
+Запустите контейнер - docker-compose up -d
+Написание Yandex.Cloud CLI для создание ВМ
+Установка Docker с помошью docker-machine
+
 ДЗ по докер-3
 
 Команды Docker:
