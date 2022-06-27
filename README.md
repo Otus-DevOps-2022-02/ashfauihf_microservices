@@ -1,4 +1,21 @@
 # ashfauihf_microservices
+Дз по logging-1
+Выполнить сборку образов при помощи скриптов docker_build.sh 
+$ export USER_NAME='ваш логин на Docker Hub'
+$ cd ./src/ui && bash docker_build.sh && docker push $USER_NAME/ui
+$ cd ../post-py && bash docker_build.sh && docker push $USER_NAME/post
+$ cd ../comment && bash docker_build.sh && docker push $USER_NAME/comment
+Kibana - инструмент для визуализации и анализа логов от компании Elastic.
+Перезапустить ui:
+docker-compose stop ui
+docker-compose rm ui
+docker-compose up -d
+
+
+
+
+
+
 Дз по monitoring-1
 
 ссылка: https://hub.docker.com/repository/docker/asz1assassins/post
@@ -48,7 +65,7 @@ docker-compose start post
 docker-machine ssh docker-host
 yes > /dev/null
 
-Задлогинимся и запушим свои образы на DockerHub
+Залогинимся и запушим свои образы на DockerHub
 docker login
 docker push $USER_NAME/ui
 docker push $USER_NAME/comment
